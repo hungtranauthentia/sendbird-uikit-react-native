@@ -1,0 +1,88 @@
+{
+  "name": "@sendbird/uikit-react-native-foundation",
+  "version": "3.5.4",
+  "description": "A foundational UI kit for building chat-enabled React Native apps.",
+  "keywords": [
+    "sendbird",
+    "uikit",
+    "React Native",
+    "chat",
+    "messaging",
+    "UI components",
+    "customizable",
+    "theme",
+    "design system"
+  ],
+  "main": "lib/commonjs/index",
+  "module": "lib/module/index",
+  "types": "lib/typescript/src/index.d.ts",
+  "react-native": "src/index",
+  "source": "src/index",
+  "files": [
+    "src",
+    "lib",
+    "!**/__tests__"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "test": "jest",
+    "build": "bob build",
+    "clean": "del lib",
+    "publish:next": "npm publish --tag next",
+    "publish:local": "yalc publish",
+    "generate-icons": "node src/assets/bundle-icons.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sendbird/sendbird-uikit-react-native.git",
+    "directory": "packages/uikit-react-native-foundation"
+  },
+  "author": "Sendbird <support@sendbird.com>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/sendbird/sendbird-uikit-react-native.git/issues"
+  },
+  "homepage": "https://github.com/sendbird/sendbird-uikit-react-native.git#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "dependencies": {
+    "@sendbird/uikit-utils": "3.5.4"
+  },
+  "devDependencies": {
+    "@types/react": "*",
+    "@types/react-native": "*",
+    "react": "17.0.2",
+    "react-native": "0.67.5",
+    "react-native-builder-bob": "^0.18.0",
+    "react-native-fast-image": "^8.5.11",
+    "react-native-safe-area-context": "^3.3.2",
+    "typescript": "5.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.2",
+    "react-native": ">=0.65.0",
+    "react-native-fast-image": ">=8.5.11",
+    "react-native-safe-area-context": ">=3.3.2"
+  },
+  "peerDependenciesMeta": {
+    "react-native-fast-image": {
+      "optional": true
+    }
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  }
+}
