@@ -1,3 +1,0 @@
-import React from 'react';
-declare const _default: React.MemoExoticComponent<(props: Pick<import("../../../components/ChannelMessageList").ChannelMessageListProps<import("@sendbird/chat/openChannel").OpenChannel>, "channel" | "onTopReached" | "onBottomReached" | "onScrolledAwayFromBottom" | "currentUserId" | "enableMessageGrouping" | "hasNext" | "onDeleteMessage" | "onResendFailedMessage" | "onPressMediaMessage" | "renderNewMessagesButton" | "renderScrollToBottomButton" | "renderMessage" | "messages" | "newMessages" | "scrolledAwayFromBottom" | "flatListProps">) => React.JSX.Element>;
-export default _default;

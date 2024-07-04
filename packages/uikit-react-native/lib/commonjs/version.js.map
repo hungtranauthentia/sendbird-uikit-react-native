@@ -1,1 +1,0 @@
-{"version":3,"names":["VERSION","_default","exports","default"],"sources":["version.ts"],"sourcesContent":["const VERSION = '3.5.4';\nexport default VERSION;\n"],"mappings":";;;;;;AAAA,MAAMA,OAAO,GAAG,OAAO;AAAC,IAAAC,QAAA,GACTD,OAAO;AAAAE,OAAA,CAAAC,OAAA,GAAAF,QAAA"}
