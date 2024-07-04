@@ -128,6 +128,8 @@ const ChannelInput = (props: ChannelInputProps) => {
     return <SafeAreaBottom height={bottom} />;
   }
 
+  console.log('KeyboardAvoidingView 3');
+
   return (
     <>
       <KeyboardAvoidingView keyboardVerticalOffset={keyboardAvoidOffset} behavior="padding">

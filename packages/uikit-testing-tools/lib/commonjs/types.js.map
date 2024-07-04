@@ -1,0 +1,1 @@
+{"version":3,"names":[],"sources":["types.ts"],"sourcesContent":["import type { MockSendbirdChatSDK } from './mocks/createMockSendbirdSDK';\n\ntype MockBasicParams = { sdk: MockSendbirdChatSDK };\n\nexport type GetMockParams<T> = Partial<T & MockBasicParams>;\nexport type GetMockProps<Params, T> = { params: Params } & T;\n"],"mappings":""}

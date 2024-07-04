@@ -1,0 +1,32 @@
+import { UserOnlineState } from '@sendbird/chat';
+import type { Sender } from '@sendbird/chat/message';
+import type { SendbirdAdminMessage, SendbirdMember, SendbirdParticipant, SendbirdUser, SendbirdUserMessage } from '@sendbird/uikit-utils';
+import type { GetMockParams } from '../types';
+type Params = GetMockParams<Sender & SendbirdUserMessage & SendbirdParticipant & SendbirdMember>;
+export declare const createMockUser: (params: Params) => MockUser;
+declare class MockUser implements SendbirdUser {
+    params: Params;
+    constructor(params: Params);
+    userId: string;
+    requireAuth: boolean;
+    nickname: string;
+    plainProfileUrl: string;
+    metaData: object;
+    connectionStatus: UserOnlineState;
+    isActive: boolean;
+    lastSeenAt: number;
+    preferredLanguages: string[];
+    friendDiscoveryKey: string;
+    friendName: string;
+    get profileUrl(): string;
+    serialize(): object;
+    createMetaData(): Promise<object>;
+    updateMetaData(): Promise<object>;
+    deleteMetaData(): Promise<object>;
+    deleteAllMetaData(): Promise<void>;
+    asParticipant(): SendbirdParticipant;
+    asMember(): SendbirdMember;
+    asAdminMessage(): SendbirdAdminMessage;
+    asSender(): Sender;
+}
+export {};
