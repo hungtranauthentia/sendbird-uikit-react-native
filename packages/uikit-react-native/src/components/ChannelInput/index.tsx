@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { KeyboardAvoidingView, Platform, StyleProp, StyleSheet, TextInput, TextStyle, View } from 'react-native';
+import { Platform, StyleProp, StyleSheet, TextInput, TextStyle, View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { createStyleSheet, useUIKitTheme } from '@sendbird/uikit-react-native-foundation';
@@ -76,7 +77,6 @@ export type ChannelInputProps = {
 };
 
 const AUTO_FOCUS = Platform.select({ ios: false, android: true, default: false });
-const KEYBOARD_AVOID_VIEW_BEHAVIOR = Platform.select({ ios: 'padding' as const, default: undefined });
 
 // FIXME(iOS): Dynamic style does not work properly when typing the CJK. (https://github.com/facebook/react-native/issues/26107)
 //  To workaround temporarily, change the key for re-mount the component.
@@ -130,10 +130,7 @@ const ChannelInput = (props: ChannelInputProps) => {
 
   return (
     <>
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={-bottom + keyboardAvoidOffset}
-        behavior={KEYBOARD_AVOID_VIEW_BEHAVIOR}
-      >
+      <KeyboardAvoidingView keyboardVerticalOffset={keyboardAvoidOffset} behavior="padding">
         <View style={{ paddingLeft: left, paddingRight: right, backgroundColor: colors.background }}>
           <View onLayout={(e) => setInputHeight(e.nativeEvent.layout.height)} style={styles.inputContainer}>
             {inputMode === 'send' && (

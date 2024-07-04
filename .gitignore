@@ -22,3 +22,6 @@ version.ts
 lerna-debug.log
 
 /docs
+
+/.yalc
+/.yarn
