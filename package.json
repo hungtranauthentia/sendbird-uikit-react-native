@@ -10,7 +10,6 @@
   },
   "packageManager": "yarn@1.22.19",
   "scripts": {
-    "postinstall": "patch-package",
     "prepare": "lerna run --stream --sort prepare",
     "prepublishOnly": "yarn build",
     "reset": "find . -type dir -name node_modules | xargs rm -rf",
