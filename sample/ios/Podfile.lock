@@ -1069,7 +1069,7 @@ PODS:
     - Yoga
   - react-native-image-resizer (3.0.10):
     - React-Core
-  - react-native-keyboard-controller (1.13.0):
+  - react-native-keyboard-controller (1.12.5):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1580,7 +1580,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../../node_modules/react-native-document-picker`)
   - react-native-image-picker (from `../../node_modules/react-native-image-picker`)
   - "react-native-image-resizer (from `../../node_modules/@bam.tech/react-native-image-resizer`)"
-  - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
+  - react-native-keyboard-controller (from `../../node_modules/react-native-keyboard-controller`)
   - react-native-mmkv (from `../../node_modules/react-native-mmkv`)
   - "react-native-netinfo (from `../../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../../node_modules/react-native-safe-area-context`)
@@ -1725,7 +1725,7 @@ EXTERNAL SOURCES:
   react-native-image-resizer:
     :path: "../../node_modules/@bam.tech/react-native-image-resizer"
   react-native-keyboard-controller:
-    :path: "../node_modules/react-native-keyboard-controller"
+    :path: "../../node_modules/react-native-keyboard-controller"
   react-native-mmkv:
     :path: "../../node_modules/react-native-mmkv"
   react-native-netinfo:
@@ -1865,7 +1865,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 5b97e24a7f1a1e4a50a72c540a043f32d29a70a2
   react-native-image-picker: c3afe5472ef870d98a4b28415fc0b928161ee5f7
   react-native-image-resizer: fd0c333eca55147bd55c5e054cac95dcd0da6814
-  react-native-keyboard-controller: b7f73b36f974ae49403ee7abbf029478ba782b0f
+  react-native-keyboard-controller: f6960e8ca47a96f87922d357eb5da24b375acdb4
   react-native-mmkv: 8c9a677e64a1ac89b0c6cf240feea528318b3074
   react-native-netinfo: 076df4f9b07f6670acf4ce9a75aac8d34c2e2ccc
   react-native-safe-area-context: ab8f4a3d8180913bd78ae75dd599c94cce3d5e9a
