@@ -66,7 +66,6 @@
     "@sendbird/uikit-utils": "3.5.4"
   },
   "devDependencies": {
-    "react-native-keyboard-controller": "^1.12.5",
     "@bam.tech/react-native-image-resizer": "^3.0.4",
     "@react-native-camera-roll/camera-roll": "^5.4.0",
     "@react-native-clipboard/clipboard": "^1.8.5",
@@ -98,6 +97,7 @@
     "react-native-document-picker": "^8.0.0",
     "react-native-file-access": "^2.5.0",
     "react-native-image-picker": "^4.7.1",
+    "react-native-keyboard-controller": "^1.12.5",
     "react-native-permissions": "^3.6.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-video": "^5.2.0",
