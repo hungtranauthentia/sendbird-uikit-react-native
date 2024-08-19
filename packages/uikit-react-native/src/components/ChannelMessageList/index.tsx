@@ -18,6 +18,7 @@ import {
   SendbirdMessage,
   SendbirdOpenChannel,
   SendbirdUserMessage,
+  SendbirdUserMessageCreateParams,
   getAvailableUriFromFileMessage,
   getFileExtension,
   getFileType,
@@ -62,6 +63,7 @@ export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpe
   onResendFailedMessage: (failedMessage: HandleableMessage) => Promise<HandleableMessage | void>;
   onPressParentMessage?: (parentMessage: SendbirdMessage, childMessage: HandleableMessage) => void;
   onPressMediaMessage?: (message: SendbirdFileMessage, deleteMessage: () => Promise<void>, uri: string) => void;
+  onPressSendUserMessage?: (params: SendbirdUserMessageCreateParams) => Promise<void>;
 
   renderMessage: (props: {
     focused: boolean;
@@ -73,6 +75,7 @@ export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpe
     onPressParentMessage?: ChannelMessageListProps<T>['onPressParentMessage'];
     onReplyInThreadMessage?: ChannelMessageListProps<T>['onReplyInThreadMessage'];
     onShowUserProfile?: UserProfileContextType['show'];
+    onPressSendUserMessage?: (params: SendbirdUserMessageCreateParams) => Promise<void>;
     channel: T;
     currentUserId?: ChannelMessageListProps<T>['currentUserId'];
     enableMessageGrouping: ChannelMessageListProps<T>['enableMessageGrouping'];
@@ -101,6 +104,7 @@ const ChannelMessageList = <T extends SendbirdGroupChannel | SendbirdOpenChannel
     onResendFailedMessage,
     onPressMediaMessage,
     onPressParentMessage,
+    onPressSendUserMessage,
     currentUserId,
     renderNewMessagesButton,
     renderScrollToBottomButton,
@@ -146,6 +150,7 @@ const ChannelMessageList = <T extends SendbirdGroupChannel | SendbirdOpenChannel
       onPressParentMessage,
       onReplyInThreadMessage,
       onShowUserProfile: show,
+      onPressSendUserMessage,
       enableMessageGrouping,
       channel,
       currentUserId,

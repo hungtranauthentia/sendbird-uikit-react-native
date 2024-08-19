@@ -5,16 +5,14 @@ import { ReplyType } from '@sendbird/chat/message';
 import { Box, useToast } from '@sendbird/uikit-react-native-foundation';
 import { useGroupChannelMessages } from '@sendbird/uikit-tools';
 import {
+  NOOP,
+  PASS,
   SendbirdFileMessage,
   SendbirdGroupChannel,
   SendbirdSendableMessage,
   SendbirdUserMessage,
-  getReadableFileSize,
-} from '@sendbird/uikit-utils';
-import {
-  NOOP,
-  PASS,
   confirmAndMarkAsRead,
+  getReadableFileSize,
   messageComparator,
   useFreshCallback,
   useIIFE,
@@ -254,6 +252,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
             enableMessageGrouping={enableMessageGrouping}
             currentUserId={currentUser?.userId}
             renderMessage={renderItem}
+            onPressSendUserMessage={onPressSendUserMessage}
             messages={messages}
             newMessages={newMessages}
             onTopReached={loadPrevious}

@@ -87,6 +87,7 @@ export interface GroupChannelProps {
     | 'flatListProps'
     | 'hasNext'
     | 'searchItem'
+    | 'onPressSendUserMessage'
   > & {
     onResetMessageList: () => Promise<void>;
     onResetMessageListWithStartingPoint: (startingPoint: number) => Promise<void>;
