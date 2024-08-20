@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { SendbirdUserMessage } from '@sendbird/uikit-utils';
+import type { PressSendUserMessageAction, SendbirdUserMessage } from '@sendbird/uikit-utils';
 
 import Box from '../../components/Box';
 import PressBox from '../../components/PressBox';
@@ -16,6 +16,7 @@ type Props = GroupChannelMessageProps<
   {
     regexTextPatterns?: RegexTextPattern[];
     renderRegexTextChildren?: (message: SendbirdUserMessage) => string;
+    onPressSendUserMessage?: PressSendUserMessageAction;
   }
 >;
 

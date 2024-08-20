@@ -13,12 +13,12 @@ import {
 } from '@sendbird/uikit-react-native-foundation';
 import {
   Logger,
+  PressSendUserMessageAction,
   SendbirdFileMessage,
   SendbirdGroupChannel,
   SendbirdMessage,
   SendbirdOpenChannel,
   SendbirdUserMessage,
-  SendbirdUserMessageCreateParams,
   getAvailableUriFromFileMessage,
   getFileExtension,
   getFileType,
@@ -39,6 +39,7 @@ import { ReactionAddons } from '../ReactionAddons';
 type PressActions = { onPress?: () => void; onLongPress?: () => void; bottomSheetItem?: BottomSheetItem };
 type HandleableMessage = SendbirdUserMessage | SendbirdFileMessage;
 type CreateMessagePressActions = (params: { message: SendbirdMessage }) => PressActions;
+
 export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpenChannel> = {
   enableMessageGrouping: boolean;
   currentUserId?: string;
@@ -63,7 +64,7 @@ export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpe
   onResendFailedMessage: (failedMessage: HandleableMessage) => Promise<HandleableMessage | void>;
   onPressParentMessage?: (parentMessage: SendbirdMessage, childMessage: HandleableMessage) => void;
   onPressMediaMessage?: (message: SendbirdFileMessage, deleteMessage: () => Promise<void>, uri: string) => void;
-  onPressSendUserMessage?: (params: SendbirdUserMessageCreateParams) => Promise<void>;
+  onPressSendUserMessage?: PressSendUserMessageAction;
 
   renderMessage: (props: {
     focused: boolean;
@@ -75,7 +76,7 @@ export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpe
     onPressParentMessage?: ChannelMessageListProps<T>['onPressParentMessage'];
     onReplyInThreadMessage?: ChannelMessageListProps<T>['onReplyInThreadMessage'];
     onShowUserProfile?: UserProfileContextType['show'];
-    onPressSendUserMessage?: (params: SendbirdUserMessageCreateParams) => Promise<void>;
+    onPressSendUserMessage?: PressSendUserMessageAction;
     channel: T;
     currentUserId?: ChannelMessageListProps<T>['currentUserId'];
     enableMessageGrouping: ChannelMessageListProps<T>['enableMessageGrouping'];
