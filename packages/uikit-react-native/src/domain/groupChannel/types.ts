@@ -6,6 +6,7 @@ import type { UseGroupChannelMessagesOptions } from '@sendbird/uikit-chat-hooks'
 import type {
   OnBeforeHandler,
   PickPartial,
+  PressSendUserMessageAction,
   SendbirdFileMessage,
   SendbirdFileMessageCreateParams,
   SendbirdFileMessageUpdateParams,
@@ -37,6 +38,7 @@ export interface GroupChannelProps {
     onBeforeSendFileMessage?: OnBeforeHandler<SendbirdFileMessageCreateParams>;
     onBeforeUpdateUserMessage?: OnBeforeHandler<SendbirdUserMessageUpdateParams>;
     onBeforeUpdateFileMessage?: OnBeforeHandler<SendbirdFileMessageUpdateParams>;
+    onChatInitialized?: OnBeforeHandler<PressSendUserMessageAction>;
 
     renderMessage?: GroupChannelProps['MessageList']['renderMessage'];
     renderNewMessagesButton?: GroupChannelProps['MessageList']['renderNewMessagesButton'];

@@ -55,6 +55,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     onBeforeSendFileMessage = PASS,
     onBeforeUpdateUserMessage = PASS,
     onBeforeUpdateFileMessage = PASS,
+    onChatInitialized = PASS,
     channel,
     keyboardAvoidOffset,
     sortComparator = messageComparator,
@@ -73,6 +74,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     const [groupChannelPubSub] = useState(() => pubsub<GroupChannelPubSubContextPayload>());
     const [scrolledAwayFromBottom, setScrolledAwayFromBottom] = useState(false);
     const scrolledAwayFromBottomRef = useRefTracker(scrolledAwayFromBottom);
+    const initializedRef = useRefTracker(false);
 
     const replyType = useIIFE(() => {
       if (sbOptions.uikit.groupChannel.channel.replyType === 'none') {
@@ -83,6 +85,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     });
 
     const {
+      initialized,
       loading,
       messages,
       newMessages,
@@ -144,6 +147,13 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
         onBlurFragment();
       };
     }, []);
+
+    useEffect(() => {
+      if (!loading && channel && !initializedRef.current && initialized) {
+        initializedRef.current = true;
+        onChatInitialized?.(onPressSendUserMessage);
+      }
+    }, [loading, initialized]);
 
     const renderItem: GroupChannelProps['MessageList']['renderMessage'] = useFreshCallback((props) => {
       const content = renderMessage ? renderMessage(props) : <GroupChannelMessageRenderer {...props} />;
