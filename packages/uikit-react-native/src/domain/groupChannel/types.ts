@@ -38,7 +38,7 @@ export interface GroupChannelProps {
     onBeforeSendFileMessage?: OnBeforeHandler<SendbirdFileMessageCreateParams>;
     onBeforeUpdateUserMessage?: OnBeforeHandler<SendbirdUserMessageUpdateParams>;
     onBeforeUpdateFileMessage?: OnBeforeHandler<SendbirdFileMessageUpdateParams>;
-    onChatInitialized?: OnBeforeHandler<PressSendUserMessageAction>;
+    onChatInitialized?: (sendUserMessageAction: PressSendUserMessageAction) => void;
 
     renderMessage?: GroupChannelProps['MessageList']['renderMessage'];
     renderNewMessagesButton?: GroupChannelProps['MessageList']['renderNewMessagesButton'];
