@@ -43,7 +43,6 @@ const GroupChannelMessageRenderer: GroupChannelProps['Fragment']['renderMessage'
   onPressParentMessage,
   onShowUserProfile,
   onReplyInThreadMessage,
-  onPressSendUserMessage,
   enableMessageGrouping,
   focused,
   prevMessage,
@@ -248,7 +247,6 @@ const GroupChannelMessageRenderer: GroupChannelProps['Fragment']['renderMessage'
           return (
             <GroupChannelMessage.User
               message={message as SendbirdUserMessage}
-              onPressSendUserMessage={onPressSendUserMessage}
               {...userMessageProps}
               {...messageProps}
             />

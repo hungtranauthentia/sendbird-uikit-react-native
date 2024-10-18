@@ -171,5 +171,3 @@ export interface NotificationFiles {
 
 export interface NotificationTranslations {}
 export interface NotificationMentionedUsers {}
-
-export type PressSendUserMessageAction = (params: SendbirdUserMessageCreateParams) => Promise<void>;

@@ -30,6 +30,7 @@ export const GroupChannelContexts: GroupChannelContextsType = {
     channel: {} as SendbirdGroupChannel,
     setMessageToEdit: NOOP,
     setMessageToReply: NOOP,
+    onPressSendUserMessage: async (_) => {},
   }),
   TypingIndicator: createContext({
     typingUsers: [] as SendbirdUser[],
@@ -59,6 +60,7 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
   messages,
   onUpdateSearchItem,
   onPressReplyMessageInThread,
+  onPressSendUserMessage,
 }) => {
   if (!channel) throw new Error('GroupChannel is not provided to GroupChannelModule');
 
@@ -135,6 +137,8 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
           setMessageToEdit: useCallback((message) => updateInputMode('edit', message), []),
           messageToReply,
           setMessageToReply: useCallback((message) => onPressMessageToReply(message), []),
+          lastMessage: messages[0],
+          onPressSendUserMessage: onPressSendUserMessage,
         }}
       >
         <GroupChannelContexts.PubSub.Provider value={groupChannelPubSub}>

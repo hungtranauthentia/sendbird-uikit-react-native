@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button, Text } from 'react-native';
 
 import { useGroupChannel } from '@sendbird/uikit-chat-hooks';
 import { GroupChannelMessageRenderer, createGroupChannelFragment, useSendbirdChat } from '@sendbird/uikit-react-native';
@@ -74,7 +73,6 @@ const GroupChannelScreen = () => {
   const { sdk } = useSendbirdChat();
   const { channel } = useGroupChannel(sdk, params.channelUrl);
   if (!channel) return null;
-
   return (
     <GroupChannelFragment
       channel={channel}
@@ -102,19 +100,6 @@ const GroupChannelScreen = () => {
       }}
       renderMessage={(props) => {
         switch (props.message.customType) {
-          case 'OUTSIDE_BUSINESS_HOURS_RANGE':
-            return <Text>OUTSIDE_BUSINESS_HOURS_RANGE</Text>;
-          case 'WORKFLOW_ACTIONS':
-            return (
-              <Button
-                onPress={() =>
-                  props.onPressSendUserMessage?.({
-                    message: 'What is the platform fee?',
-                  })
-                }
-                title="WORKFLOW_ACTIONS"
-              ></Button>
-            );
           default:
             return <GroupChannelMessageRenderer {...props} />;
         }

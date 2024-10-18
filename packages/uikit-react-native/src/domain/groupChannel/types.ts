@@ -6,7 +6,6 @@ import type { UseGroupChannelMessagesOptions } from '@sendbird/uikit-chat-hooks'
 import type {
   OnBeforeHandler,
   PickPartial,
-  PressSendUserMessageAction,
   SendbirdFileMessage,
   SendbirdFileMessageCreateParams,
   SendbirdFileMessageUpdateParams,
@@ -38,7 +37,7 @@ export interface GroupChannelProps {
     onBeforeSendFileMessage?: OnBeforeHandler<SendbirdFileMessageCreateParams>;
     onBeforeUpdateUserMessage?: OnBeforeHandler<SendbirdUserMessageUpdateParams>;
     onBeforeUpdateFileMessage?: OnBeforeHandler<SendbirdFileMessageUpdateParams>;
-    onChatInitialized?: (sendUserMessageAction: PressSendUserMessageAction) => void;
+    onChatInitialized?: (sendUserMessageAction: GroupChannelProps['Input']['onPressSendUserMessage']) => void;
 
     renderMessage?: GroupChannelProps['MessageList']['renderMessage'];
     renderNewMessagesButton?: GroupChannelProps['MessageList']['renderNewMessagesButton'];
@@ -89,7 +88,6 @@ export interface GroupChannelProps {
     | 'flatListProps'
     | 'hasNext'
     | 'searchItem'
-    | 'onPressSendUserMessage'
   > & {
     onResetMessageList: () => Promise<void>;
     onResetMessageListWithStartingPoint: (startingPoint: number) => Promise<void>;
@@ -120,6 +118,7 @@ export interface GroupChannelProps {
     // Changing the search item will trigger the focus animation on messages.
     onUpdateSearchItem: (searchItem?: GroupChannelProps['MessageList']['searchItem']) => void;
     onPressReplyMessageInThread: (parentMessage: SendbirdSendableMessage, startingPoint?: number) => void;
+    onPressSendUserMessage: GroupChannelProps['Input']['onPressSendUserMessage'];
   };
 }
 
@@ -137,6 +136,8 @@ export interface GroupChannelContextsType {
     setMessageToEdit: (msg?: SendbirdUserMessage | SendbirdFileMessage) => void;
     messageToReply?: SendbirdUserMessage | SendbirdFileMessage;
     setMessageToReply: (msg?: SendbirdUserMessage | SendbirdFileMessage) => void;
+    lastMessage?: SendbirdMessage;
+    onPressSendUserMessage: GroupChannelProps['Input']['onPressSendUserMessage'];
   }>;
   TypingIndicator: React.Context<{
     typingUsers: SendbirdUser[];

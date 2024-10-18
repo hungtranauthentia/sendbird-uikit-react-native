@@ -246,6 +246,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
         messages={messages}
         onUpdateSearchItem={onUpdateSearchItem}
         onPressReplyMessageInThread={_onPressReplyMessageInThread}
+        onPressSendUserMessage={onPressSendUserMessage}
       >
         <GroupChannelModule.Header
           shouldHideRight={navigateFromMessageSearch}
@@ -262,7 +263,6 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
             enableMessageGrouping={enableMessageGrouping}
             currentUserId={currentUser?.userId}
             renderMessage={renderItem}
-            onPressSendUserMessage={onPressSendUserMessage}
             messages={messages}
             newMessages={newMessages}
             onTopReached={loadPrevious}
