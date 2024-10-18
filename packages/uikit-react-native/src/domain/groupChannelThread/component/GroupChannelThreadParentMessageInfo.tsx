@@ -30,7 +30,7 @@ import {
 import ThreadParentMessageRenderer, {
   ThreadParentMessageRendererProps,
 } from '../../../components/ThreadParentMessageRenderer';
-import { useLocalization, usePlatformService, useSendbirdChat } from '../../../hooks/useContext';
+import { useLocalization, usePlatformService, useSBUHandlers, useSendbirdChat } from '../../../hooks/useContext';
 import SBUUtils from '../../../libs/SBUUtils';
 import { GroupChannelThreadContexts } from '../module/moduleContext';
 import type { GroupChannelThreadProps } from '../types';
@@ -182,6 +182,7 @@ const useCreateMessagePressActions = ({
   GroupChannelThreadProps['ParentMessageInfo'],
   'channel' | 'currentUserId' | 'onDeleteMessage' | 'onPressMediaMessage'
 > & { onEditMessage: (message: HandleableMessage) => void }): CreateMessagePressActions => {
+  const handlers = useSBUHandlers();
   const { STRINGS } = useLocalization();
   const toast = useToast();
   const { openSheet } = useBottomSheet();
@@ -224,9 +225,11 @@ const useCreateMessagePressActions = ({
     if (message.isFileMessage()) {
       const fileType = getFileType(message.type || getFileExtension(message.name));
       if (['image', 'video', 'audio'].includes(fileType)) {
-        onPressMediaMessage?.(message, () => onDeleteMessage?.(message), getAvailableUriFromFileMessage(message));
+        onPressMediaMessage?.(message, () => onDeleteMessage(message), getAvailableUriFromFileMessage(message));
+        handlers.onOpenFileURL?.(message.url);
       } else {
-        SBUUtils.openURL(message.url);
+        const openFile = handlers.onOpenFileURL ?? SBUUtils.openURL;
+        openFile(message.url);
       }
     }
   };
@@ -240,7 +243,7 @@ const useCreateMessagePressActions = ({
           text: STRINGS.LABELS.CHANNEL_MESSAGE_DELETE_CONFIRM_OK,
           style: 'destructive',
           onPress: () => {
-            onDeleteMessage?.(message).catch(onDeleteFailure);
+            onDeleteMessage(message).catch(onDeleteFailure);
           },
         },
       ],
