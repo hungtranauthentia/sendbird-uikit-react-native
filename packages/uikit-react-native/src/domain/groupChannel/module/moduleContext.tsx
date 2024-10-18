@@ -137,7 +137,6 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
           setMessageToEdit: useCallback((message) => updateInputMode('edit', message), []),
           messageToReply,
           setMessageToReply: useCallback((message) => onPressMessageToReply(message), []),
-          lastMessage: messages[0],
           onPressSendUserMessage: onPressSendUserMessage,
         }}
       >

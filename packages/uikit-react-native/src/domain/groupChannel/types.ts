@@ -136,7 +136,6 @@ export interface GroupChannelContextsType {
     setMessageToEdit: (msg?: SendbirdUserMessage | SendbirdFileMessage) => void;
     messageToReply?: SendbirdUserMessage | SendbirdFileMessage;
     setMessageToReply: (msg?: SendbirdUserMessage | SendbirdFileMessage) => void;
-    lastMessage?: SendbirdMessage;
     onPressSendUserMessage: GroupChannelProps['Input']['onPressSendUserMessage'];
   }>;
   TypingIndicator: React.Context<{
