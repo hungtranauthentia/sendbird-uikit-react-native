@@ -58,6 +58,7 @@ export type ChannelInputProps = {
   inputFrozen: boolean;
   inputMuted: boolean;
   inputDisabled: boolean;
+  disabledByWorkflow?: boolean;
 
   // edit
   messageToEdit: undefined | SendbirdUserMessage | SendbirdFileMessage;

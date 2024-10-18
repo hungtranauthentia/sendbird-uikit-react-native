@@ -1,7 +1,8 @@
 import type { Locale } from 'date-fns';
 
-import { PartialDeep, SendbirdMessage, getThreadParentMessageTimeFormat } from '@sendbird/uikit-utils';
 import {
+  PartialDeep,
+  SendbirdMessage,
   getDateSeparatorFormat,
   getGroupChannelPreviewTime,
   getGroupChannelTitle,
@@ -13,6 +14,7 @@ import {
   getOpenChannelParticipants,
   getOpenChannelTitle,
   getReplyCountFormat,
+  getThreadParentMessageTimeFormat,
   isVoiceMessage,
 } from '@sendbird/uikit-utils';
 
@@ -314,6 +316,7 @@ export const createBaseStringSet = ({ dateLocale, overrides }: StringSetCreateOp
       CHANNEL_INPUT_ATTACHMENT_FILES: 'Files',
       CHANNEL_INPUT_PLACEHOLDER_ACTIVE: 'Enter message',
       CHANNEL_INPUT_PLACEHOLDER_DISABLED: 'Chat not available in this channel.',
+      CHANNEL_INPUT_WORKFLOW_DISABLED: 'Please choose one from above',
       CHANNEL_INPUT_PLACEHOLDER_MUTED: "You're muted by the operator.",
       CHANNEL_INPUT_PLACEHOLDER_REPLY: 'Reply to message',
       CHANNEL_INPUT_PLACEHOLDER_REPLY_IN_THREAD: 'Reply in thread',
