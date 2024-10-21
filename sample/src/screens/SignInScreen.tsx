@@ -29,7 +29,10 @@ const SignInScreen = () => {
       const data = await SendbirdAPI.getSessionToken(userId);
       await connect(userId, { nickname, accessToken: data.token });
     } else {
-      await connect(userId, { nickname });
+      await connect('sendbird_mobile_agent_id_b614cfbc-ff5e-42fe-9273-d5a55d10ed05', {
+        nickname: 'Hung Tran',
+        accessToken: '',
+      });
     }
   };
 

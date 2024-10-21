@@ -105,7 +105,6 @@ const createOpenChannelFragment = (initModule?: Partial<OpenChannelModule>): Ope
     const memoizedFlatListProps = useMemo(
       () => ({
         ListEmptyComponent: <OpenChannelModule.StatusEmpty />,
-        contentContainerStyle: { flexGrow: 1 },
         ...flatListProps,
       }),
       [loading, flatListProps],

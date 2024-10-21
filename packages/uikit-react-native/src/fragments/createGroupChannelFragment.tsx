@@ -168,7 +168,6 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     const memoizedFlatListProps = useMemo(
       () => ({
         ListEmptyComponent: <GroupChannelModule.StatusEmpty />,
-        contentContainerStyle: { flexGrow: 1 },
         ...flatListProps,
       }),
       [flatListProps],

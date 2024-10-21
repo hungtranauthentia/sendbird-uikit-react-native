@@ -76,7 +76,7 @@ const createMessageSearchFragment = (initModule?: Partial<MessageSearchModule>):
                 keyboardShouldPersistTaps: 'handled',
                 onEndReached: next,
                 ListEmptyComponent: MessageSearchModule.StatusEmpty,
-                contentContainerStyle: { flexGrow: 1, ...padding },
+                contentContainerStyle: padding,
               }}
             />
           )}

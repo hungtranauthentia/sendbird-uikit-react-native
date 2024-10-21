@@ -60,7 +60,6 @@ const createGroupChannelListFragment = (initModule?: Partial<GroupChannelListMod
             onLoadNext={loadMore}
             flatListProps={{
               ListEmptyComponent: <GroupChannelListModule.StatusEmpty />,
-              contentContainerStyle: { flexGrow: 1 },
               ...flatListProps,
             }}
           />

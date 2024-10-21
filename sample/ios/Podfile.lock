@@ -1433,6 +1433,27 @@ PODS:
     - Firebase/Messaging (= 8.15.0)
     - React-Core
     - RNFBApp
+  - RNFlashList (1.7.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNNotifee (5.7.0):
     - React-Core
     - RNNotifeeCore
@@ -1618,6 +1639,7 @@ DEPENDENCIES:
   - RNFastImage (from `../../node_modules/react-native-fast-image`)
   - "RNFBApp (from `../../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../../node_modules/@react-native-firebase/messaging`)"
+  - "RNFlashList (from `../../node_modules/@shopify/flash-list`)"
   - "RNNotifee (from `../../node_modules/@notifee/react-native`)"
   - "RNNotifeeCore (from `../../node_modules/@notifee/react-native/RNNotifeeCore.podspec`)"
   - RNPermissions (from `../../node_modules/react-native-permissions`)
@@ -1800,6 +1822,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@react-native-firebase/app"
   RNFBMessaging:
     :path: "../../node_modules/@react-native-firebase/messaging"
+  RNFlashList:
+    :path: "../../node_modules/@shopify/flash-list"
   RNNotifee:
     :path: "../../node_modules/@notifee/react-native"
   RNNotifeeCore:
@@ -1903,6 +1927,7 @@ SPEC CHECKSUMS:
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
   RNFBMessaging: 40dac204b4197a2661dec5be964780c6ec39bf65
+  RNFlashList: e9c5b8fe1b84f9c198cb550eb4cc0c45569fbf42
   RNNotifee: 40cc97ddc290e102894ea5381e90905f50598cfe
   RNNotifeeCore: 2d6233c6e9cf7755b8f460061c7811113043d2d3
   RNPermissions: 4e3714e18afe7141d000beae3755e5b5fb2f5e05

@@ -1,5 +1,6 @@
+import { FlashList, FlashListProps, ListRenderItem } from '@shopify/flash-list';
 import React, { Ref } from 'react';
-import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -84,9 +85,9 @@ export type ChannelThreadMessageListProps<T extends SendbirdGroupChannel | Sendb
     | null
     | ((props: { visible: boolean; onPress: () => void; newMessages: SendbirdMessage[] }) => React.ReactElement | null);
   renderScrollToBottomButton: null | ((props: { visible: boolean; onPress: () => void }) => React.ReactElement | null);
-  flatListProps?: Omit<FlatListProps<SendbirdMessage>, 'data' | 'renderItem'>;
+  flatListProps?: Omit<FlashListProps<SendbirdMessage>, 'data' | 'renderItem'>;
 } & {
-  ref?: Ref<FlatList<SendbirdMessage>> | undefined;
+  ref?: Ref<FlashList<SendbirdMessage>> | undefined;
 };
 
 const ChannelThreadMessageList = <T extends SendbirdGroupChannel | SendbirdOpenChannel>(
@@ -113,7 +114,7 @@ const ChannelThreadMessageList = <T extends SendbirdGroupChannel | SendbirdOpenC
     onPressNewMessagesButton,
     onPressScrollToBottomButton,
   }: ChannelThreadMessageListProps<T>,
-  ref: React.ForwardedRef<FlatList<SendbirdMessage>>,
+  ref: React.ForwardedRef<FlashList<SendbirdMessage>>,
 ) => {
   const { STRINGS } = useLocalization();
   const { colors } = useUIKitTheme();
@@ -162,11 +163,10 @@ const ChannelThreadMessageList = <T extends SendbirdGroupChannel | SendbirdOpenC
         data={messages}
         renderItem={renderItem}
         keyExtractor={messageKeyExtractor}
-        contentContainerStyle={[
-          // { minHeight: '100%', justifyContent: 'flex-end' },
-          channel.isFrozen && styles.frozenListPadding,
-          flatListProps?.contentContainerStyle,
-        ]}
+        contentContainerStyle={{
+          ...flatListProps?.contentContainerStyle,
+          ...(channel.isFrozen && styles.frozenListPadding),
+        }}
       />
       {renderNewMessagesButton && (
         <View style={[styles.newMsgButton, safeAreaLayout]}>

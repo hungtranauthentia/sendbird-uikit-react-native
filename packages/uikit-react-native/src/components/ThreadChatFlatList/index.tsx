@@ -1,20 +1,21 @@
+import { FlashList, FlashListProps } from '@shopify/flash-list';
 import React, { forwardRef, useRef } from 'react';
-import { FlatListProps, FlatList as RNFlatList, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { useUIKitTheme } from '@sendbird/uikit-react-native-foundation';
-import { NOOP, SendbirdMessage, getMessageUniqId, useFreshCallback } from '@sendbird/uikit-utils';
+import { SendbirdMessage, getMessageUniqId, useFreshCallback } from '@sendbird/uikit-utils';
 
 import FlatListInternal from '../ChatFlatList/FlatListInternal';
 
 const BOTTOM_DETECT_THRESHOLD = 50;
 const UNREACHABLE_THRESHOLD = Number.MIN_SAFE_INTEGER;
 
-type Props = Omit<FlatListProps<SendbirdMessage>, 'onEndReached'> & {
+type Props = Omit<FlashListProps<SendbirdMessage>, 'onEndReached'> & {
   onBottomReached: () => void;
   onTopReached: () => void;
   onScrolledAwayFromBottom: (value: boolean) => void;
 };
-const ThreadChatFlatList = forwardRef<RNFlatList, Props>(function ThreadChatFlatList(
+const ThreadChatFlatList = forwardRef<FlashList<SendbirdMessage>, Props>(function ThreadChatFlatList(
   { onTopReached, onBottomReached, onScrolledAwayFromBottom, onScroll, ...props },
   ref,
 ) {
@@ -49,7 +50,6 @@ const ThreadChatFlatList = forwardRef<RNFlatList, Props>(function ThreadChatFlat
       {...props}
       ref={ref}
       onEndReached={onBottomReached}
-      onScrollToIndexFailed={NOOP}
       onStartReached={onTopReached}
       scrollEventThrottle={16}
       onScroll={_onScroll}

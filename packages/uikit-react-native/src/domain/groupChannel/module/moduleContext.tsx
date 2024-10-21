@@ -1,5 +1,5 @@
+import type { FlashList } from '@shopify/flash-list';
 import React, { createContext, useCallback, useRef, useState } from 'react';
-import type { FlatList } from 'react-native';
 
 import { useChannelHandler } from '@sendbird/uikit-chat-hooks';
 import {
@@ -163,7 +163,7 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
 type MessageListContextValue = ContextValue<GroupChannelContextsType['MessageList']>;
 const useScrollActions = (params: Pick<GroupChannelProps['Provider'], 'messages' | 'onUpdateSearchItem'>) => {
   const { messages, onUpdateSearchItem } = params;
-  const flatListRef = useRef<FlatList<SendbirdMessage>>(null);
+  const flatListRef = useRef<FlashList<SendbirdMessage>>(null);
 
   // FIXME: Workaround, should run after data has been applied to UI.
   const lazyScrollToBottom = useFreshCallback<MessageListContextValue['lazyScrollToIndex']>((params) => {

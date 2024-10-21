@@ -1,5 +1,5 @@
+import type { FlashList } from '@shopify/flash-list';
 import type React from 'react';
-import type { FlatList } from 'react-native';
 
 import type { MessageCollectionParams, MessageFilterParams } from '@sendbird/chat/groupChannel';
 import type { UseGroupChannelMessagesOptions } from '@sendbird/uikit-chat-hooks';
@@ -146,7 +146,7 @@ export interface GroupChannelContextsType {
     /**
      * ref object for FlatList of MessageList
      * */
-    flatListRef: React.MutableRefObject<FlatList | null>;
+    flatListRef: React.MutableRefObject<FlashList<SendbirdMessage> | null>;
     /**
      * Function that scrolls to a message within a group channel.
      * @param messageId {number} - The id of the message to scroll.
