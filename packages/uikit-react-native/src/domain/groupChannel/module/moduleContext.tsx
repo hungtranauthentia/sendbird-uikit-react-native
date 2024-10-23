@@ -138,6 +138,7 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
           messageToReply,
           setMessageToReply: useCallback((message) => onPressMessageToReply(message), []),
           onPressSendUserMessage: onPressSendUserMessage,
+          lastMessage: messages[0],
         }}
       >
         <GroupChannelContexts.PubSub.Provider value={groupChannelPubSub}>
