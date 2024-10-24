@@ -1,17 +1,18 @@
+import type { FlashList, FlashListProps } from '@shopify/flash-list';
 import type { ForwardedRef, ReactElement } from 'react';
-import type { FlatListProps, FlatList as RNFlatList, ScrollViewProps } from 'react-native';
+import type { ScrollViewProps } from 'react-native';
 import { Platform } from 'react-native';
 
 import type { SendbirdMessage } from '@sendbird/uikit-utils';
 
-type FlatListBidirectional<T = SendbirdMessage> = (props: FlatListProps<T> & BidirectionalProps<T>) => ReactElement;
+type FlatListBidirectional<T = SendbirdMessage> = (props: FlashListProps<T> & BidirectionalProps<T>) => ReactElement;
 type BidirectionalProps<T> = {
   onStartReached?: ((info: { distanceFromStart: number }) => void) | null | undefined;
   onStartReachedThreshold?: number | null | undefined;
   onEndReached?: ((info: { distanceFromEnd: number }) => void) | null | undefined;
   onEndReachedThreshold?: number | null | undefined;
   maintainVisibleContentPosition?: ScrollViewProps['maintainVisibleContentPosition'];
-  ref: ForwardedRef<RNFlatList<T>>;
+  ref: ForwardedRef<FlashList<T>>;
 };
 
 function shouldUseScrollViewEnhancer() {

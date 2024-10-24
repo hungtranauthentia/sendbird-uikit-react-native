@@ -38,6 +38,7 @@ const Avatar = ({ uri, square, muted = false, size = 56, containerStyle }: Props
             onError={() => setLoadFailure(true)}
             source={{ uri }}
             resizeMode={'cover'}
+            recyclingKey={uri}
             style={StyleSheet.absoluteFill}
           />,
           <Icon icon={'user'} size={size / 2} color={colors.onBackgroundReverse01} />,

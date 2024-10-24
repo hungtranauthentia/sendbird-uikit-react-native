@@ -2,11 +2,12 @@ import Notifee from '@notifee/react-native';
 import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { AppState } from 'react-native';
+// import LogView from './components/LogView';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { SendbirdUIKitContainer, TypingIndicatorType, useSendbirdChat } from '@sendbird/uikit-react-native';
 import { DarkUIKitTheme, LightUIKitTheme } from '@sendbird/uikit-react-native-foundation';
 
-// import LogView from './components/LogView';
 import { APP_ID } from './env';
 import { GetTranslucent, RootStack, SetSendbirdSDK, platformServices } from './factory';
 import { mmkv } from './factory/mmkv';
@@ -53,54 +54,56 @@ const App = () => {
   const isLightTheme = scheme === 'light';
 
   return (
-    <SendbirdUIKitContainer
-      appId={APP_ID}
-      uikitOptions={{
-        common: {
-          enableUsingDefaultUserProfile: true,
-        },
-        groupChannel: {
-          enableMention: true,
-          typingIndicatorTypes: new Set([TypingIndicatorType.Text, TypingIndicatorType.Bubble]),
-          replyType: 'thread',
-          threadReplySelectType: 'thread',
-        },
-        groupChannelList: {
-          enableTypingIndicator: true,
-          enableMessageReceiptStatus: true,
-        },
-        groupChannelSettings: {
-          enableMessageSearch: true,
-        },
-      }}
-      chatOptions={{
-        localCacheStorage: mmkv,
-        onInitialized: SetSendbirdSDK,
-        enableAutoPushTokenRegistration: true,
-      }}
-      platformServices={platformServices}
-      styles={{
-        defaultHeaderTitleAlign: 'left', //'center',
-        theme: isLightTheme ? LightUIKitTheme : DarkUIKitTheme,
-        statusBarTranslucent: GetTranslucent(),
-      }}
-      errorBoundary={{ ErrorInfoComponent: ErrorInfoScreen }}
-      userProfile={{
-        onCreateChannel: (channel) => {
-          const params = { channelUrl: channel.url };
+    <KeyboardProvider>
+      <SendbirdUIKitContainer
+        appId={APP_ID}
+        uikitOptions={{
+          common: {
+            enableUsingDefaultUserProfile: true,
+          },
+          groupChannel: {
+            enableMention: false,
+            typingIndicatorTypes: new Set([TypingIndicatorType.Text, TypingIndicatorType.Bubble]),
+            replyType: 'none',
+            enableReactions: false,
+          },
+          groupChannelList: {
+            enableTypingIndicator: true,
+            enableMessageReceiptStatus: true,
+          },
+          groupChannelSettings: {
+            enableMessageSearch: true,
+          },
+        }}
+        chatOptions={{
+          localCacheStorage: mmkv,
+          onInitialized: SetSendbirdSDK,
+          enableAutoPushTokenRegistration: true,
+        }}
+        platformServices={platformServices}
+        styles={{
+          defaultHeaderTitleAlign: 'left', //'center',
+          theme: isLightTheme ? LightUIKitTheme : DarkUIKitTheme,
+          statusBarTranslucent: GetTranslucent(),
+        }}
+        errorBoundary={{ ErrorInfoComponent: ErrorInfoScreen }}
+        userProfile={{
+          onCreateChannel: (channel) => {
+            const params = { channelUrl: channel.url };
 
-          if (channel.isGroupChannel()) {
-            navigationActions.push(Routes.GroupChannel, params);
-          }
+            if (channel.isGroupChannel()) {
+              navigationActions.push(Routes.GroupChannel, params);
+            }
 
-          if (channel.isOpenChannel()) {
-            navigationActions.push(Routes.OpenChannel, params);
-          }
-        },
-      }}
-    >
-      <Navigations />
-    </SendbirdUIKitContainer>
+            if (channel.isOpenChannel()) {
+              navigationActions.push(Routes.OpenChannel, params);
+            }
+          },
+        }}
+      >
+        <Navigations />
+      </SendbirdUIKitContainer>
+    </KeyboardProvider>
   );
 };
 

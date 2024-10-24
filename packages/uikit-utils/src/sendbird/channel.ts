@@ -22,8 +22,9 @@ export const getGroupChannelChatAvailableState = (channel: SendbirdGroupChannel)
   const isOperator = channel.myRole === 'operator';
   const frozen = channel.isFrozen && !isOperator;
   const muted = channel.myMutedState === 'muted';
-  const disabled = frozen || muted;
-  return { disabled, frozen, muted };
+  const disabledByWorkflow = channel.lastMessage?.extendedMessagePayload?.disable_chat_input === true;
+  const disabled = frozen || muted || disabledByWorkflow;
+  return { disabled, frozen, muted, disabledByWorkflow };
 };
 
 export const getOpenChannelChatAvailableState = async (channel: SendbirdOpenChannel, userId: string) => {

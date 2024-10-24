@@ -1,5 +1,5 @@
+import type { FlashList } from '@shopify/flash-list';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import type { FlatList } from 'react-native';
 
 import { SendbirdMessage, useFreshCallback } from '@sendbird/uikit-utils';
 
@@ -11,7 +11,7 @@ const OpenChannelMessageList = (props: OpenChannelProps['MessageList']) => {
   const { setMessageToEdit } = useContext(OpenChannelContexts.Fragment);
   const { subscribe } = useContext(OpenChannelContexts.PubSub);
 
-  const ref = useRef<FlatList<SendbirdMessage>>(null);
+  const ref = useRef<FlashList<SendbirdMessage>>(null);
   const [scrolledAwayFromBottom, setScrolledAwayFromBottom] = useState(false);
 
   const scrollToBottom = useFreshCallback((animated = false) => {

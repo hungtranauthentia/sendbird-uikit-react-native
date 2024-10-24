@@ -50,6 +50,7 @@ const SendInput = forwardRef<RNTextInput, SendInputProps>(function SendInput(
     inputDisabled,
     inputFrozen,
     inputMuted,
+    disabledByWorkflow = false,
     channel,
     messageToReply,
     setMessageToReply,
@@ -160,6 +161,7 @@ const SendInput = forwardRef<RNTextInput, SendInputProps>(function SendInput(
   const sheetItems = useChannelInputItems(channel, sendFileMessage);
 
   const getPlaceholder = () => {
+    if (disabledByWorkflow) return STRINGS.LABELS.CHANNEL_INPUT_WORKFLOW_DISABLED;
     if (inputMuted) return STRINGS.LABELS.CHANNEL_INPUT_PLACEHOLDER_MUTED;
     if (inputFrozen) return STRINGS.LABELS.CHANNEL_INPUT_PLACEHOLDER_DISABLED;
     if (inputDisabled) return STRINGS.LABELS.CHANNEL_INPUT_PLACEHOLDER_DISABLED;

@@ -1,5 +1,5 @@
+import type { FlashList } from '@shopify/flash-list';
 import React, { createContext, useRef, useState } from 'react';
-import type { FlatList } from 'react-native';
 
 import {
   ContextValue,
@@ -93,7 +93,7 @@ export const GroupChannelThreadContextsProvider: GroupChannelThreadModule['Provi
 type MessageListContextValue = ContextValue<GroupChannelThreadContextsType['MessageList']>;
 const useScrollActions = (params: Pick<GroupChannelThreadProps['Provider'], 'threadedMessages'>) => {
   const { threadedMessages } = params;
-  const flatListRef = useRef<FlatList<SendbirdMessage>>(null);
+  const flatListRef = useRef<FlashList<SendbirdMessage>>(null);
 
   // FIXME: Workaround, should run after data has been applied to UI.
   const lazyScrollToBottom = useFreshCallback<MessageListContextValue['lazyScrollToIndex']>((params) => {

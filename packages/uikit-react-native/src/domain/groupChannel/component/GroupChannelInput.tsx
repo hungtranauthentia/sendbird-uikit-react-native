@@ -28,7 +28,8 @@ const GroupChannelInput = ({ inputDisabled = false, ...props }: GroupChannelProp
       keyboardAvoidOffset={keyboardAvoidOffset}
       inputMuted={chatAvailableState.muted}
       inputFrozen={chatAvailableState.frozen}
-      inputDisabled={chatAvailableState.disabled ? true : inputDisabled}
+      inputDisabled={chatAvailableState.disabled || inputDisabled}
+      disabledByWorkflow={chatAvailableState.disabledByWorkflow}
       {...props}
     />
   );

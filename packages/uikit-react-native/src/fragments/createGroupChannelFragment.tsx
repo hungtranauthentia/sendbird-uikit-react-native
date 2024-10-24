@@ -5,16 +5,14 @@ import { ReplyType } from '@sendbird/chat/message';
 import { Box, useToast } from '@sendbird/uikit-react-native-foundation';
 import { useGroupChannelMessages } from '@sendbird/uikit-tools';
 import {
+  NOOP,
+  PASS,
   SendbirdFileMessage,
   SendbirdGroupChannel,
   SendbirdSendableMessage,
   SendbirdUserMessage,
-  getReadableFileSize,
-} from '@sendbird/uikit-utils';
-import {
-  NOOP,
-  PASS,
   confirmAndMarkAsRead,
+  getReadableFileSize,
   messageComparator,
   useFreshCallback,
   useIIFE,
@@ -57,6 +55,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     onBeforeSendFileMessage = PASS,
     onBeforeUpdateUserMessage = PASS,
     onBeforeUpdateFileMessage = PASS,
+    onChatInitialized = PASS,
     channel,
     keyboardAvoidOffset,
     sortComparator = messageComparator,
@@ -75,6 +74,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     const [groupChannelPubSub] = useState(() => pubsub<GroupChannelPubSubContextPayload>());
     const [scrolledAwayFromBottom, setScrolledAwayFromBottom] = useState(false);
     const scrolledAwayFromBottomRef = useRefTracker(scrolledAwayFromBottom);
+    const initializedRef = useRefTracker(false);
 
     const replyType = useIIFE(() => {
       if (sbOptions.uikit.groupChannel.channel.replyType === 'none') {
@@ -85,6 +85,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     });
 
     const {
+      initialized,
       loading,
       messages,
       newMessages,
@@ -148,6 +149,13 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
       };
     }, []);
 
+    useEffect(() => {
+      if (!loading && channel && !initializedRef.current && initialized) {
+        initializedRef.current = true;
+        onChatInitialized?.(onPressSendUserMessage);
+      }
+    }, [loading, initialized]);
+
     const renderItem: GroupChannelProps['MessageList']['renderMessage'] = useFreshCallback((props) => {
       const content = renderMessage ? renderMessage(props) : <GroupChannelMessageRenderer {...props} />;
       return (
@@ -161,7 +169,6 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
     const memoizedFlatListProps = useMemo(
       () => ({
         ListEmptyComponent: <GroupChannelModule.StatusEmpty />,
-        contentContainerStyle: { flexGrow: 1 },
         ...flatListProps,
       }),
       [flatListProps],
@@ -239,6 +246,7 @@ const createGroupChannelFragment = (initModule?: Partial<GroupChannelModule>): G
         messages={messages}
         onUpdateSearchItem={onUpdateSearchItem}
         onPressReplyMessageInThread={_onPressReplyMessageInThread}
+        onPressSendUserMessage={onPressSendUserMessage}
       >
         <GroupChannelModule.Header
           shouldHideRight={navigateFromMessageSearch}

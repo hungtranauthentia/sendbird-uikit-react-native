@@ -55,7 +55,6 @@ const createOpenChannelListFragment = (initModule?: Partial<OpenChannelListModul
             onRefresh={refresh}
             flatListProps={{
               ListEmptyComponent: <OpenChannelListModule.StatusEmpty />,
-              contentContainerStyle: { flexGrow: 1 },
               ...flatListProps,
             }}
           />

@@ -1,5 +1,5 @@
+import type { FlashList } from '@shopify/flash-list';
 import React, { createContext, useCallback, useRef, useState } from 'react';
-import type { FlatList } from 'react-native';
 
 import { useChannelHandler } from '@sendbird/uikit-chat-hooks';
 import {
@@ -30,6 +30,7 @@ export const GroupChannelContexts: GroupChannelContextsType = {
     channel: {} as SendbirdGroupChannel,
     setMessageToEdit: NOOP,
     setMessageToReply: NOOP,
+    onPressSendUserMessage: async (_) => {},
   }),
   TypingIndicator: createContext({
     typingUsers: [] as SendbirdUser[],
@@ -59,6 +60,7 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
   messages,
   onUpdateSearchItem,
   onPressReplyMessageInThread,
+  onPressSendUserMessage,
 }) => {
   if (!channel) throw new Error('GroupChannel is not provided to GroupChannelModule');
 
@@ -135,6 +137,8 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
           setMessageToEdit: useCallback((message) => updateInputMode('edit', message), []),
           messageToReply,
           setMessageToReply: useCallback((message) => onPressMessageToReply(message), []),
+          onPressSendUserMessage: onPressSendUserMessage,
+          lastMessage: messages[0],
         }}
       >
         <GroupChannelContexts.PubSub.Provider value={groupChannelPubSub}>
@@ -160,7 +164,7 @@ export const GroupChannelContextsProvider: GroupChannelModule['Provider'] = ({
 type MessageListContextValue = ContextValue<GroupChannelContextsType['MessageList']>;
 const useScrollActions = (params: Pick<GroupChannelProps['Provider'], 'messages' | 'onUpdateSearchItem'>) => {
   const { messages, onUpdateSearchItem } = params;
-  const flatListRef = useRef<FlatList<SendbirdMessage>>(null);
+  const flatListRef = useRef<FlashList<SendbirdMessage>>(null);
 
   // FIXME: Workaround, should run after data has been applied to UI.
   const lazyScrollToBottom = useFreshCallback<MessageListContextValue['lazyScrollToIndex']>((params) => {

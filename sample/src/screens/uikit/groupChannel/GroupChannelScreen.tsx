@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useGroupChannel } from '@sendbird/uikit-chat-hooks';
-import { createGroupChannelFragment, useSendbirdChat } from '@sendbird/uikit-react-native';
+import { GroupChannelMessageRenderer, createGroupChannelFragment, useSendbirdChat } from '@sendbird/uikit-react-native';
 
 import { useAppNavigation } from '../../../hooks/useAppNavigation';
 import { Routes } from '../../../libs/navigation';
@@ -73,7 +73,6 @@ const GroupChannelScreen = () => {
   const { sdk } = useSendbirdChat();
   const { channel } = useGroupChannel(sdk, params.channelUrl);
   if (!channel) return null;
-
   return (
     <GroupChannelFragment
       channel={channel}
@@ -90,12 +89,20 @@ const GroupChannelScreen = () => {
         navigation.navigate(Routes.GroupChannelList);
       }}
       onPressHeaderLeft={() => {
+        console.log('onPressHeaderLeft');
+
         // Navigate back
         navigation.goBack();
       }}
       onPressHeaderRight={() => {
         // Navigate to group channel settings
         navigation.push(Routes.GroupChannelSettings, params);
+      }}
+      renderMessage={(props) => {
+        switch (props.message.customType) {
+          default:
+            return <GroupChannelMessageRenderer {...props} />;
+        }
       }}
       onPressReplyMessageInThread={(message, startingPoint) => {
         // Navigate to thread
