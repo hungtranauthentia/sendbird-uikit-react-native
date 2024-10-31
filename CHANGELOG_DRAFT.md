@@ -1,4 +1,6 @@
-## v3.7.3
+## v3.7.5
 
-- Enhanced Compatibility with `date-fns`: Updated internal code and dependencies to ensure better compatibility with the latest version of the `date-fns` library.
-- Fixed Token Deregistration Bug: Adjusted the code to ensure that token deregistration completes successfully before initiating a disconnect.
+- Updated Android permissions to comply with Google Play Store policies
+- Fixed an issue where images were not visible in the file viewer due to z-index conflicts in the new architecture
+- Fixed an issue where reactions could not be added or removed correctly
+- Fixed an issue with scroll behavior during message streaming in bot chats for smoother scrolling

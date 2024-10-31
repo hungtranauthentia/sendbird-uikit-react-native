@@ -40,7 +40,7 @@ const GroupChannelMessageList = (props: GroupChannelProps['MessageList']) => {
           if (focusAnimated) {
             props.onUpdateSearchItem({ startingPoint: createdAt });
           }
-          props.onResetMessageListWithStartingPoint(createdAt);
+          props.onResetMessageListWithStartingPoint(createdAt).catch((_) => {});
         } else {
           return false;
         }
@@ -54,7 +54,7 @@ const GroupChannelMessageList = (props: GroupChannelProps['MessageList']) => {
       props.onUpdateSearchItem(undefined);
       props.onScrolledAwayFromBottom(false);
 
-      await props.onResetMessageList();
+      await props.onResetMessageList().catch((_) => {});
       props.onScrolledAwayFromBottom(false);
       lazyScrollToBottom({ animated });
     } else {
@@ -75,11 +75,27 @@ const GroupChannelMessageList = (props: GroupChannelProps['MessageList']) => {
   });
 
   useEffect(() => {
-    return subscribe(({ type }) => {
+    return subscribe(({ type, data }) => {
       switch (type) {
         case 'TYPING_BUBBLE_RENDERED':
         case 'MESSAGES_RECEIVED': {
           if (!props.scrolledAwayFromBottom) {
+            scrollToBottom(true);
+          }
+          break;
+        }
+        case 'MESSAGES_UPDATED': {
+          const lastMessage = props.channel.lastMessage;
+          const [updatedMessage] = data.messages;
+
+          const lastMessageUpdated =
+            updatedMessage && lastMessage && lastMessage.messageId === updatedMessage.messageId;
+
+          const isMaybeStreaming = props.channel.hasAiBot && lastMessageUpdated;
+
+          if (isMaybeStreaming) {
+            scrollToBottom(false);
+          } else if (!props.scrolledAwayFromBottom && lastMessageUpdated) {
             scrollToBottom(true);
           }
           break;

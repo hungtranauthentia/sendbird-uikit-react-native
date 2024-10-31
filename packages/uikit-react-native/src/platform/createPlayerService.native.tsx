@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import type * as RNAudioRecorder from 'react-native-audio-recorder-player';
 import * as Permissions from 'react-native-permissions';
 
-import { matchesOneOf, sleep } from '@sendbird/uikit-utils';
+import { Logger, matchesOneOf, sleep } from '@sendbird/uikit-utils';
 
 import type { PlayerServiceInterface, Unsubscribe } from './types';
 
@@ -23,7 +23,9 @@ const createNativePlayerService = ({ audioRecorderModule, permissionModule }: Mo
     private readonly stateSubscribers = new Set<StateListener>();
 
     constructor() {
-      module.setSubscriptionDuration(0.1);
+      module.setSubscriptionDuration(0.1).catch((error) => {
+        Logger.warn('[PlayerService.Native] Failed to set subscription duration', error);
+      });
     }
 
     private setState = (state: PlayerServiceInterface['state']) => {
@@ -34,10 +36,14 @@ const createNativePlayerService = ({ audioRecorderModule, permissionModule }: Mo
     };
 
     private setListener = () => {
-      module.addPlayBackListener((data) => {
+      module.addPlayBackListener(async (data) => {
         const stopped = data.currentPosition >= data.duration;
 
-        if (stopped) this.stop();
+        if (stopped) {
+          this.stop().catch((error) => {
+            Logger.warn('[PlayerService.Native] Failed to stop in PlayBackListener', error);
+          });
+        }
         if (this.state === 'playing') {
           this.playbackSubscribers.forEach((callback) => {
             callback({ currentTime: data.currentPosition, duration: data.duration, stopped });
@@ -52,14 +58,15 @@ const createNativePlayerService = ({ audioRecorderModule, permissionModule }: Mo
 
     public requestPermission = async (): Promise<boolean> => {
       if (Platform.OS === 'android') {
-        const { READ_MEDIA_AUDIO, READ_EXTERNAL_STORAGE } = permissionModule.PERMISSIONS.ANDROID;
-        const permission = Platform.Version > 32 ? READ_MEDIA_AUDIO : READ_EXTERNAL_STORAGE;
+        if (Platform.Version > 32) return true;
 
-        const status = await permissionModule.check(permission);
+        const { READ_EXTERNAL_STORAGE } = permissionModule.PERMISSIONS.ANDROID;
+
+        const status = await permissionModule.check(READ_EXTERNAL_STORAGE);
         if (status === 'granted') {
           return true;
         } else {
-          const status = await permissionModule.request(permission);
+          const status = await permissionModule.request(READ_EXTERNAL_STORAGE);
           return status === 'granted';
         }
       } else {

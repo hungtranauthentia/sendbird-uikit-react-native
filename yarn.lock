@@ -5147,9 +5147,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sendbird/chat@npm:4.12.9":
-  version: 4.12.9
-  resolution: "@sendbird/chat@npm:4.12.9"
+"@sendbird/chat@npm:4.13.3":
+  version: 4.13.3
+  resolution: "@sendbird/chat@npm:4.13.3"
   peerDependencies:
     "@react-native-async-storage/async-storage": ^1.17.6
     react-native-mmkv: ^2.0.0
@@ -5158,7 +5158,7 @@ __metadata:
       optional: true
     react-native-mmkv:
       optional: true
-  checksum: 10/564dacf7ba6314e167e9cdd084c01888323dee71207a7fab53ceaacfec80313b011afd11a863ad3db3bc018d99af3eeb550870c37f080e227763cc0989dec1d4
+  checksum: 10/9a4980aa0ce6a044d270d9b77ed324a93620f9e1c578fbb5c75012bfa4e8607ed16c0a7fca83da9d288d0c575c8abf43dadad4dde581753a1c00ba71d2f77d3a
   languageName: node
   linkType: hard
 
@@ -5175,7 +5175,7 @@ __metadata:
     "@react-native-firebase/messaging": "npm:^14.7.0"
     "@react-navigation/native": "npm:^6.1.17"
     "@react-navigation/native-stack": "npm:^6.10.0"
-    "@sendbird/chat": "npm:^4.12.9"
+    "@sendbird/chat": "npm:^4.13.3"
     "@types/jest": "npm:^26.0.23"
     "@types/react": "npm:*"
     "@types/react-native": "npm:*"
@@ -5205,27 +5205,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sendbird/uikit-chat-hooks@npm:3.7.3, @sendbird/uikit-chat-hooks@workspace:packages/uikit-chat-hooks":
+"@sendbird/uikit-chat-hooks@npm:3.7.5, @sendbird/uikit-chat-hooks@workspace:packages/uikit-chat-hooks":
   version: 0.0.0-use.local
   resolution: "@sendbird/uikit-chat-hooks@workspace:packages/uikit-chat-hooks"
   dependencies:
-    "@sendbird/uikit-testing-tools": "npm:3.7.3"
-    "@sendbird/uikit-utils": "npm:3.7.3"
+    "@sendbird/uikit-testing-tools": "npm:3.7.5"
+    "@sendbird/uikit-utils": "npm:3.7.5"
     "@types/react": "npm:*"
     react: "npm:18.2.0"
     react-native-builder-bob: "npm:^0.18.0"
     typescript: "npm:5.2.2"
   peerDependencies:
-    "@sendbird/chat": ^4.12.9
+    "@sendbird/chat": ^4.13.3
     react: ">=16.13.1"
   languageName: unknown
   linkType: soft
 
-"@sendbird/uikit-react-native-foundation@npm:3.7.3, @sendbird/uikit-react-native-foundation@workspace:packages/uikit-react-native-foundation":
+"@sendbird/uikit-react-native-foundation@npm:3.7.5, @sendbird/uikit-react-native-foundation@workspace:packages/uikit-react-native-foundation":
   version: 0.0.0-use.local
   resolution: "@sendbird/uikit-react-native-foundation@workspace:packages/uikit-react-native-foundation"
   dependencies:
-    "@sendbird/uikit-utils": "npm:3.7.3"
+    "@sendbird/uikit-utils": "npm:3.7.5"
     "@types/react": "npm:*"
     "@types/react-native": "npm:*"
     react: "npm:18.2.0"
@@ -5257,10 +5257,10 @@ __metadata:
     "@react-native-community/netinfo": "npm:^11.3.2"
     "@react-native-firebase/app": "npm:^14.4.0"
     "@react-native-firebase/messaging": "npm:^14.4.0"
-    "@sendbird/uikit-chat-hooks": "npm:3.7.3"
-    "@sendbird/uikit-react-native-foundation": "npm:3.7.3"
+    "@sendbird/uikit-chat-hooks": "npm:3.7.5"
+    "@sendbird/uikit-react-native-foundation": "npm:3.7.5"
     "@sendbird/uikit-tools": "npm:0.0.1-alpha.77"
-    "@sendbird/uikit-utils": "npm:3.7.3"
+    "@sendbird/uikit-utils": "npm:3.7.5"
     "@shopify/flash-list": "npm:1.7.1"
     "@types/react": "npm:*"
     "@types/react-native": "npm:*"
@@ -5299,7 +5299,7 @@ __metadata:
     "@react-native-clipboard/clipboard": ">=1.8.5"
     "@react-native-community/netinfo": ">=9.3.0"
     "@react-native-firebase/messaging": ">=14.4.0"
-    "@sendbird/chat": ^4.12.9
+    "@sendbird/chat": ^4.13.3
     "@sendbird/react-native-scrollview-enhancer": "*"
     "@shopify/flash-list": 1.7.1
     date-fns: ">=2.28.0"
@@ -5401,7 +5401,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:^6.6.0"
     "@react-navigation/native": "npm:^6.1.17"
     "@react-navigation/native-stack": "npm:^6.10.0"
-    "@sendbird/chat": "npm:^4.12.9"
+    "@sendbird/chat": "npm:^4.13.3"
     "@shopify/flash-list": "npm:1.7.1"
     "@storybook/addon-actions": "npm:^6.4.19"
     "@storybook/addon-controls": "npm:^6.4.19"
@@ -5445,12 +5445,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sendbird/uikit-testing-tools@npm:3.7.3, @sendbird/uikit-testing-tools@workspace:packages/uikit-testing-tools":
+"@sendbird/uikit-testing-tools@npm:3.7.5, @sendbird/uikit-testing-tools@workspace:packages/uikit-testing-tools":
   version: 0.0.0-use.local
   resolution: "@sendbird/uikit-testing-tools@workspace:packages/uikit-testing-tools"
   dependencies:
-    "@sendbird/chat": "npm:^4.12.9"
-    "@sendbird/uikit-utils": "npm:3.7.3"
+    "@sendbird/chat": "npm:^4.13.3"
+    "@sendbird/uikit-utils": "npm:3.7.5"
     "@types/jest": "npm:^29.4.0"
     "@types/react": "npm:*"
     "@types/react-native": "npm:*"
@@ -5472,7 +5472,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sendbird/uikit-utils@npm:3.7.3, @sendbird/uikit-utils@workspace:packages/uikit-utils":
+"@sendbird/uikit-utils@npm:3.7.5, @sendbird/uikit-utils@workspace:packages/uikit-utils":
   version: 0.0.0-use.local
   resolution: "@sendbird/uikit-utils@workspace:packages/uikit-utils"
   dependencies:
@@ -5485,7 +5485,7 @@ __metadata:
     string.prototype.matchall: "npm:^4.0.7"
     typescript: "npm:5.2.2"
   peerDependencies:
-    "@sendbird/chat": ^4.12.9
+    "@sendbird/chat": ^4.13.3
     date-fns: ">=2.28.0"
     react: ">=17.0.2"
     react-native: ">=0.65.0"
