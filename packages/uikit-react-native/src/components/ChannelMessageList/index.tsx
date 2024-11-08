@@ -359,7 +359,11 @@ const useCreateMessagePressActions = <T extends SendbirdGroupChannel | SendbirdO
     if (message.isUserMessage()) {
       sheetItems.push(menu.copy(message));
       if (!channel.isEphemeral) {
-        if (isMyMessage(message, currentUserId) && message.sendingStatus === 'succeeded') {
+        if (
+          isMyMessage(message, currentUserId) &&
+          message.sendingStatus === 'succeeded' &&
+          sbOptions.uikit.groupChannel.channel.enableEditableMessage
+        ) {
           sheetItems.push(menu.edit(message));
           sheetItems.push(menu.delete(message));
         }
