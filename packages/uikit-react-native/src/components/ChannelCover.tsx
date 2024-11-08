@@ -11,16 +11,17 @@ type Props = {
   channel: SendbirdBaseChannel;
   size: number;
   containerStyle?: StyleProp<ViewStyle>;
+  coverUrl?: string;
 };
 
-const ChannelCover = ({ channel, ...avatarProps }: Props) => {
+const ChannelCover = ({ channel, coverUrl, ...avatarProps }: Props) => {
   const { currentUser } = useSendbirdChat();
   const { colors } = useUIKitTheme();
 
   if (channel.isGroupChannel()) {
     // custom channel cover
     if (!isDefaultCoverImage(channel.coverUrl) || !currentUser) {
-      return <Avatar uri={channel.coverUrl} {...avatarProps} />;
+      return <Avatar uri={coverUrl ?? channel.coverUrl} {...avatarProps} />;
     }
 
     // broadcast channel cover
