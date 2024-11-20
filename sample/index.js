@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppRegistry, LogBox } from 'react-native';
 import { withTouchReload } from 'react-native-touch-reload';
-// import Sendbird from 'sendbird';
 
+// import Sendbird from 'sendbird';
 import { Logger } from '@sendbird/uikit-utils';
 
 import { name as appName } from './app.json';
@@ -11,7 +11,7 @@ import { withAppearance } from './src/hooks/useAppearance';
 import './src/libs/notification';
 
 // Sendbird.setLogLevel(Sendbird.LogLevel.DEBUG);
-Logger.setLogLevel('warn');
+Logger.setLogLevel('debug');
 LogBox.ignoreLogs(['UIKit Warning', 'FileViewer > params.deleteMessage (Function)']);
 
 const App = withTouchReload(withAppearance(AppRoot));

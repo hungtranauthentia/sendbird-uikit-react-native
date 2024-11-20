@@ -30,8 +30,16 @@ type Props = {
   channel: SendbirdGroupChannel;
   onPress: () => void;
   onLongPress: () => void;
+  transformBody?: (body: string) => string;
+  coverUrl?: string;
 };
-const GroupChannelPreviewContainer = ({ onPress, onLongPress, channel }: Props) => {
+const GroupChannelPreviewContainer = ({
+  coverUrl,
+  onPress,
+  onLongPress,
+  channel,
+  transformBody = (body) => body,
+}: Props) => {
   const { currentUser, sdk, sbOptions, mentionManager } = useSendbirdChat();
   const { STRINGS } = useLocalization();
   const { colors } = useUIKitTheme();
@@ -94,12 +102,12 @@ const GroupChannelPreviewContainer = ({ onPress, onLongPress, channel }: Props) 
   return (
     <Pressable delayLongPress={DEFAULT_LONG_PRESS_DELAY} onPress={onPress} onLongPress={onLongPress}>
       <GroupChannelPreview
-        customCover={<ChannelCover channel={channel} size={56} />}
-        coverUrl={channel.coverUrl}
+        customCover={<ChannelCover channel={channel} size={56} coverUrl={coverUrl} />}
+        coverUrl={coverUrl ?? channel.coverUrl}
         title={STRINGS.GROUP_CHANNEL_LIST.CHANNEL_PREVIEW_TITLE(currentUser?.userId ?? '', channel)}
         titleCaptionLeft={titleCaptionIcon}
         titleCaption={STRINGS.GROUP_CHANNEL_LIST.CHANNEL_PREVIEW_TITLE_CAPTION(channel)}
-        body={bodyText}
+        body={transformBody(bodyText)}
         bodyIcon={fileType && getFileIconFromMessageType(convertFileTypeToMessageType(fileType))}
         badgeCount={unreadMessageCount}
         mentioned={channel.unreadMentionCount > 0}

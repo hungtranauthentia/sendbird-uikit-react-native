@@ -7,7 +7,7 @@ import type EmojiManager from '../libs/EmojiManager';
 import { useSendbirdChat } from './useContext';
 import usePushTokenRegistration from './usePushTokenRegistration';
 
-type ConnectOptions = { nickname?: string; accessToken?: string };
+export type ConnectOptions = { nickname?: string; accessToken?: string };
 
 const cacheRestrictCodes = [400300, 400301, 400302, 400310];
 function isCacheRestrictedError(error: SendbirdError) {

@@ -1,5 +1,5 @@
+import type { FlashList } from '@shopify/flash-list';
 import type React from 'react';
-import type { FlatList } from 'react-native';
 
 import type { MessageCollectionParams, MessageFilterParams } from '@sendbird/chat/groupChannel';
 import type { UseGroupChannelMessagesOptions } from '@sendbird/uikit-chat-hooks';
@@ -37,6 +37,7 @@ export interface GroupChannelProps {
     onBeforeSendFileMessage?: OnBeforeHandler<SendbirdFileMessageCreateParams>;
     onBeforeUpdateUserMessage?: OnBeforeHandler<SendbirdUserMessageUpdateParams>;
     onBeforeUpdateFileMessage?: OnBeforeHandler<SendbirdFileMessageUpdateParams>;
+    onChatInitialized?: (sendUserMessageAction: GroupChannelProps['Input']['onPressSendUserMessage']) => void;
 
     renderMessage?: GroupChannelProps['MessageList']['renderMessage'];
     renderNewMessagesButton?: GroupChannelProps['MessageList']['renderNewMessagesButton'];
@@ -117,6 +118,7 @@ export interface GroupChannelProps {
     // Changing the search item will trigger the focus animation on messages.
     onUpdateSearchItem: (searchItem?: GroupChannelProps['MessageList']['searchItem']) => void;
     onPressReplyMessageInThread: (parentMessage: SendbirdSendableMessage, startingPoint?: number) => void;
+    onPressSendUserMessage: GroupChannelProps['Input']['onPressSendUserMessage'];
   };
 }
 
@@ -134,6 +136,8 @@ export interface GroupChannelContextsType {
     setMessageToEdit: (msg?: SendbirdUserMessage | SendbirdFileMessage) => void;
     messageToReply?: SendbirdUserMessage | SendbirdFileMessage;
     setMessageToReply: (msg?: SendbirdUserMessage | SendbirdFileMessage) => void;
+    onPressSendUserMessage: GroupChannelProps['Input']['onPressSendUserMessage'];
+    lastMessage?: SendbirdMessage;
   }>;
   TypingIndicator: React.Context<{
     typingUsers: SendbirdUser[];
@@ -143,7 +147,7 @@ export interface GroupChannelContextsType {
     /**
      * ref object for FlatList of MessageList
      * */
-    flatListRef: React.MutableRefObject<FlatList | null>;
+    flatListRef: React.MutableRefObject<FlashList<SendbirdMessage> | null>;
     /**
      * Function that scrolls to a message within a group channel.
      * @param messageId {number} - The id of the message to scroll.

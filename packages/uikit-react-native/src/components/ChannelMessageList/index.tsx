@@ -1,5 +1,6 @@
+import { FlashList, FlashListProps, ListRenderItem } from '@shopify/flash-list';
 import React, { Ref } from 'react';
-import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -44,6 +45,10 @@ import { ReactionAddons } from '../ReactionAddons';
 type PressActions = { onPress?: () => void; onLongPress?: () => void; bottomSheetItem?: BottomSheetItem };
 type HandleableMessage = SendbirdUserMessage | SendbirdFileMessage;
 type CreateMessagePressActions = (params: { message: SendbirdMessage }) => PressActions;
+type BidirectionalProps = {
+  onStartReachedThreshold?: number | null | undefined;
+};
+
 export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpenChannel> = {
   enableMessageGrouping: boolean;
   currentUserId?: string;
@@ -90,9 +95,9 @@ export type ChannelMessageListProps<T extends SendbirdGroupChannel | SendbirdOpe
     | null
     | ((props: { visible: boolean; onPress: () => void; newMessages: SendbirdMessage[] }) => React.ReactElement | null);
   renderScrollToBottomButton: null | ((props: { visible: boolean; onPress: () => void }) => React.ReactElement | null);
-  flatListProps?: Omit<FlatListProps<SendbirdMessage>, 'data' | 'renderItem'>;
+  flatListProps?: Omit<FlashListProps<SendbirdMessage>, 'data' | 'renderItem'> & BidirectionalProps;
 } & {
-  ref?: Ref<FlatList<SendbirdMessage>> | undefined;
+  ref?: Ref<FlashList<SendbirdMessage>> | undefined;
 };
 
 const ChannelMessageList = <T extends SendbirdGroupChannel | SendbirdOpenChannel>(
@@ -122,7 +127,7 @@ const ChannelMessageList = <T extends SendbirdGroupChannel | SendbirdOpenChannel
     onPressNewMessagesButton,
     onPressScrollToBottomButton,
   }: ChannelMessageListProps<T>,
-  ref: React.ForwardedRef<FlatList<SendbirdMessage>>,
+  ref: React.ForwardedRef<FlashList<SendbirdMessage>>,
 ) => {
   const { STRINGS } = useLocalization();
   const { colors } = useUIKitTheme();
@@ -175,11 +180,10 @@ const ChannelMessageList = <T extends SendbirdGroupChannel | SendbirdOpenChannel
         data={messages}
         renderItem={renderItem}
         keyExtractor={messageKeyExtractor}
-        contentContainerStyle={[
-          // { minHeight: '100%', justifyContent: 'flex-end' },
-          channel.isFrozen && styles.frozenListPadding,
-          flatListProps?.contentContainerStyle,
-        ]}
+        contentContainerStyle={{
+          ...flatListProps?.contentContainerStyle,
+          ...(channel.isFrozen && styles.frozenListPadding),
+        }}
       />
       {renderNewMessagesButton && (
         <View style={[styles.newMsgButton, safeAreaLayout]}>
@@ -355,7 +359,11 @@ const useCreateMessagePressActions = <T extends SendbirdGroupChannel | SendbirdO
     if (message.isUserMessage()) {
       sheetItems.push(menu.copy(message));
       if (!channel.isEphemeral) {
-        if (isMyMessage(message, currentUserId) && message.sendingStatus === 'succeeded') {
+        if (
+          isMyMessage(message, currentUserId) &&
+          message.sendingStatus === 'succeeded' &&
+          sbOptions.uikit.groupChannel.channel.enableEditableMessage
+        ) {
           sheetItems.push(menu.edit(message));
           sheetItems.push(menu.delete(message));
         }

@@ -3,16 +3,14 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box, useToast } from '@sendbird/uikit-react-native-foundation';
 import { useGroupChannelThreadMessages } from '@sendbird/uikit-tools';
 import {
+  NOOP,
+  PASS,
   SendbirdFileMessage,
   SendbirdGroupChannel,
   type SendbirdMessage,
   SendbirdUserMessage,
-  getReadableFileSize,
-} from '@sendbird/uikit-utils';
-import {
-  NOOP,
-  PASS,
   confirmAndMarkAsRead,
+  getReadableFileSize,
   messageComparator,
   useFreshCallback,
   useRefTracker,
@@ -152,7 +150,6 @@ const createGroupChannelThreadFragment = (
             onPressMediaMessage={_onPressMediaMessage}
           />
         ),
-        contentContainerStyle: { flexGrow: 1 },
         ...flatListProps,
       }),
       [flatListProps],
