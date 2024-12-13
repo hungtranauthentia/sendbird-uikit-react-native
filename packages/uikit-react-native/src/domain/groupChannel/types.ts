@@ -103,7 +103,8 @@ export interface GroupChannelProps {
     | 'onPressUpdateUserMessage'
     | 'onPressUpdateFileMessage'
     | 'SuggestedMentionList'
-    | 'AttachmentsButton',
+    | 'AttachmentsButton'
+    | 'disabledByWorkflow',
     'inputDisabled'
   >;
 
