@@ -8,13 +8,19 @@ import createStyleSheet from '../../styles/createStyleSheet';
 import useUIKitTheme from '../../theme/useUIKitTheme';
 import type { GroupChannelMessageProps } from './index';
 
-const AdminMessage = (props: GroupChannelMessageProps<SendbirdAdminMessage>) => {
+const AdminMessage = ({
+  renderRegexTextChildren = (msg) => msg.message,
+  message,
+}: GroupChannelMessageProps<
+  SendbirdAdminMessage,
+  { renderRegexTextChildren?: (message: SendbirdAdminMessage) => string }
+>) => {
   const { colors } = useUIKitTheme();
 
   return (
     <Box style={styles.container}>
       <Text caption2 color={colors.onBackground02} style={styles.text}>
-        {props.message.message}
+        {renderRegexTextChildren(message)}
       </Text>
     </Box>
   );
